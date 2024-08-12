@@ -1,18 +1,28 @@
 import {View, Text, StyleSheet, Alert} from "react-native";
 import {useEffect, useState} from "react";
-import {AuthenticationService} from "../../services/Authentication.service";
-import UpdatePassword from "../../components/UpdatePassword/UpdatePassword.component";
+import PasswordUpdateComponent from "../../components/PasswordUpdate/PasswordUpdate.componentt";
 
-function UpdatePasswordPage() {
-    const [type, setType] = useState('');
-    const [message, setMessage] = useState('');
-    const [details, setDetails] = useState('');
+const PasswordUpdatePage = () => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.header}>Update Password</Text>
+            <PasswordUpdateComponent />
+        </View>
+    );
+};
 
-    const handleErrorPassword = async() => {
-        Alert.alert('Invalid Password')
-    }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#f5f5f5',
+    },
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
+});
 
-    return <div className="update-password">
-        <UpdatePassword></UpdatePassword>
-    </div>
-}
+export default PasswordUpdatePage;

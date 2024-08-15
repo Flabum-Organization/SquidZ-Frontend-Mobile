@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import { UserService } from '../../services/User.service';
+import { DataUpdateService } from '../../services/DataUpdate.service';
 
-const UpdatePasswordComponent = () => {
+const PasswordUpdateComponent = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     
-    const userService = new UserService();
+    const dataUpdateService = new DataUpdateService();
 
     const handleUpdatePassword = async () => {
         if (newPassword !== confirmPassword) {
             Alert.alert('Error', 'New password and confirmation do not match.');
             return;
         }
-
         setLoading(true);
         try {
-            await userService.updatePassword(currentPassword, newPassword);
+            await dataUpdateService.updatePassword(currentPassword, newPassword);
             Alert.alert('Success', 'Password updated successfully.');
         } catch (error) {
             Alert.alert('Error', error.message);
@@ -76,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UpdatePasswordComponent;
+export default PasswordUpdateComponent;

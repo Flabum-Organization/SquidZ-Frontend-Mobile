@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { PasswordUpdatePage } from './src/dataUpdate/pages/PasswordUpdatePage/PasswordUpdatePage';
+import PasswordUpdateComponent from './src/dataUpdate/components/PasswordUpdate/PasswordUpdate.component';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <PasswordUpdateComponent></PasswordUpdateComponent>
     </View>
   );
 }

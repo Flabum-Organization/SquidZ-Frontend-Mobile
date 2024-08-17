@@ -3,111 +3,53 @@ import { StyleSheet } from 'react-native';
 // Styles for the SignUp component
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '50%',
-    backgroundColor: '#FFFFFC',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signUpForm: {
-    backgroundColor: '#454545',
-    width: '70%',
-    minWidth: 490,
-    minHeight: 800,
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: -5, height: 5 },
-    shadowOpacity: 0.55,
-    shadowRadius: 20,
-    elevation: 5,
-    transform: [{ translateX: -9000 }],
-    opacity: 0,
-  },
-  signUpFormMoveImageTrue: {
-    transform: [{ translateX: 0 }],
-  },
-   logoSquidz: {
-    width: 200,
-    height: 200,
-    marginBottom: 50,
-  },
-  inputFullNameContainer: {
-    width: '90%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  inputContainer: {
-    width: '90%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  inputFull: {
-    width: '80%',
-    height: 35,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginTop: 8,
-    paddingLeft: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    outlineWidth: 0,
-  },
-  inputHalf: {
-    width: '49%',
-  },
-  input: {
+    backgroundColor: '#FFFFFF',
     width: '100%',
-    height: 35,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginTop: 8,
-    paddingLeft: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    outlineWidth: 0,
+    height: '100%',
+    alignItems: 'center',  
   },
   
-  inputEmail: {
-    marginBottom: 10,
-  },
-  buttonLinkContainer: {
-    marginTop: 30,
-    height: 50,
-    width: '50%',
-    backgroundColor: '#6B9AC4',
-    borderWidth: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    fontFamily: 'League Spartan',
-    color: 'white',
-    fontSize: 15,
-    marginBottom: 10,
+  logoSquidz: {
+    marginTop: 60,
+    width: 250,
+    height: 250,
+    marginBottom: 30,
   },
 
+  objectContainer: {
+    width: '90%',
+    height: 'auto',
   
-  signInLink: {
-    fontWeight: 'normal',
-    color: 'black',
-    
-    fontWeight: 'bold',
   },
-  signInLinkHover: {
-    color: '#6B9AC4',
-    fontWeight: 'bold',
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
+
+  inputContainer: {
+    flex: 1,
+    marginHorizontal: 22,
+  },
+
+  input: {
+    width: '100%',
+    height: 40,
+    borderRadius: 10,
+    borderWidth: 0,
+    paddingLeft: 15,
+    fontSize: 13,
+    fontWeight: 'bold',
+    outline: 'none',
+    backgroundColor: '#F3F0F0',
+    marginBottom: 15,
+  },
+
   invalid: {
-    borderColor: 'red',
     borderWidth: 3,
+    borderColor: 'red',
   },
-  hideValidMessage: {
-    display: 'none',
-  },
+
   validMessage: {
     display: 'flex',
     fontWeight: 'normal',
@@ -115,15 +57,42 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: '#ff8800',
   },
-  // Adjustments for responsive design
-  smallScreen: {
-    minWidth: '90%',
+
+  passwordForgotten: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'normal',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
   },
-  mediumScreen: {
-    minWidth: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: [{ translateX: -50 }, { translateY: -50 }],
+
+  buttomContainer: {
+    marginTop: 5,
+    alignItems: 'center',  
+  },
+
+  button: {
+    height: 50,
+    width: 200,
+    backgroundColor: '#6B9AC4',
+    borderWidth: 0,
+    justifyContent: 'center',
+    alignItems: 'center',  
+  },
+
+  signUpText: {
+    marginTop: 20,
+    fontWeight: 'normal',
+    color: 'white',
+  },
+
+  signUpLink: {
+    fontWeight: 'normal',
+    color: 'black',
+    textDecorationLine: 'underline',
+    
+    fontWeight: 'bold',
+  
   },
 });
 

@@ -1,45 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Image, TouchableOpacity, Animated } from 'react-native';
-import styles from './SignIn.styles'; // Asegúrate de que los estilos están correctamente definidos
+import { View, Text, TextInput, TouchableOpacity, Image, Animated} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
+import styles from './SignIn.styles';
 
-
-
-const SignIn = ({ moveImage, onSignUpClick, erroSignIn, successSignIn, navigation }) => {
+export function SignIn ()  {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [formAnim] = useState(new Animated.Value(0)); // Para animación
+    
+    const insets = useSafeAreaInsets();
 
-    useEffect(() => {
-        // Configura la animación inicial si es necesario
-        Animated.timing(formAnim, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: true
-        }).start();
-    }, []);
-
-    const SignInFormSubmit = async () => {
+    const handleSignUp = async () => {
         setLoading(true);
 
+        if (!validateName(name) || !validateName(lastName) || !validateEmail(email) || !validateTelephone(telephone) || !validatePassword(password) || password !== repeatPassword) {
+            setLoading(false);
+            errorSignUp();
+            return;
+        }
+
         try {
-            await authenticationService.signIn(email, password);
-            successSignIn();
+            await authenticationService.signUp(name, lastName, email, telephone, password, repeatPassword);
+            successSignUp();
+            onSignInClick();
         } catch (error) {
-            erroSignIn();
+            errorSignUp();
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <View style={styles.signInContainer}>
-            <Animated.View style={[styles.signInForm, { opacity: formAnim }]}>
-                <Image source={{ uri: 'public/assets/squidz.png' }} style={styles.logoSquidz} />
-             
-                <View style={styles.inputEmailContainerSignIn}>
+        <View style={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
+            <View style={styles.container}>
+                <Image
+                    source={require('../../../../assets/squidz.png')} // Ruta relativa
+                    style={styles.logoSquidz}
+                />
+
+                <View style={styles.objectContainer}>
                     <TextInput
-                        style={styles.emailInputSignIn}
+                        style={styles.input}
                         value={email}
                         onChangeText={setEmail}
                         keyboardType="email-address"
@@ -48,9 +50,9 @@ const SignIn = ({ moveImage, onSignUpClick, erroSignIn, successSignIn, navigatio
                     />
                 </View>
 
-                <View style={styles.inputPasswordContainerSignIn}>
+                <View style={styles.objectContainer}>
                     <TextInput
-                        style={styles.passwordInputSignIn}
+                        style={styles.input}
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry={true}
@@ -58,25 +60,30 @@ const SignIn = ({ moveImage, onSignUpClick, erroSignIn, successSignIn, navigatio
                         placeholderTextColor="#808080"
                     />
                 </View>
+                
+                <View style={styles.buttomContainer}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => console.log('Boton presionado :D')}>
+                        <Text style={styles.buttonText}>
+                            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                        </Text>
+                    </TouchableOpacity>
 
-                <View style={styles.buttomLinkContainerSignIn}>
-                    <Button
-                        style={styles.buttomLinkSignIn}
-                        title={loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-                        onPress={SignInFormSubmit}
-                        color="#6B9AC4"
-                    />
                     <Text style={styles.signUpText}>
                         ¿Aún no tiene una cuenta en SquidZ?{' '}
-                        <Text style={styles.signUpLink} onPress={() => navigation.navigate('SignUp')}>
-                            Registrarse
-                        </Text>
+                        <Link href= "/register">
+                            <Text style={styles.signUpLink}>
+                                Registrarse
+                            </Text>
+                        </Link>
                     </Text>
                     <Text style={styles.passwordForgotten}>Olvidé mi contraseña</Text>
                 </View>
-            </Animated.View>
+
+                
+            </View>        
         </View>
     );
 };
 
-export { SignIn };

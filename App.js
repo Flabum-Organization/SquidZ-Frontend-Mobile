@@ -1,22 +1,22 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import AuthenticationPage from './src/authentication/pages/AuthenticationPage';
-
-function App() {
+import { View, StyleSheet, Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { SignIn } from './src/authentication/components/signin/SignIn.component'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+export default function App() {
   return (
-    <View style={styles.app}>
-      <AuthenticationPage />
-    </View>
+    <SafeAreaProvider>
+      <View style = {styles.container}>
+        <StatusBar style ={"light"}/>
+        <SignIn />
+      </View>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  app: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
+  container: {
+    backgroundColor: '#000000',
     justifyContent: 'center', 
-    alignItems: 'center',   
+   
   },
 });
-
-export default App;

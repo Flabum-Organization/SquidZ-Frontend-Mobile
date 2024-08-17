@@ -1,35 +1,20 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  signInContainer: {
-    backgroundColor: '#FFFFFC',
-    width: '100%',
-    height: '100%',
-  },
-  signInForm: {
+  container: {
     backgroundColor: '#454545',
-    height: '100%',
     width: '100%',
-    minWidth: 490,
-    minHeight: 650,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
+    height: '100%',
+    alignItems: 'center',  
   },
   
-  logoSquidz: {
-    width: 200,
-    height: 200,
-    marginBottom: 50,
-  },
-  inputEmailContainerSignIn: {
+  objectContainer: {
     width: '90%',
     height: 'auto',
     marginBottom: 20,
-    
   },
 
-  emailInputSignIn: {
+  input: {
     width: '100%',
     height: 40,
     borderRadius: 10,
@@ -38,60 +23,40 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     fontSize: 13,
     fontWeight: 'bold',
-    fontFamily: 'League Spartan',
     outline: 'none',
     backgroundColor: '#FFFFFF',
   },
 
-  passwordInputSignIn: {
-    width: '100%',
-    height: 40,
-    borderRadius: 10,
-    borderWidth: 0,
-    marginTop: 8,
-    paddingLeft: 15,
-    fontSize: 13,
-    fontWeight: 'bold',
-    fontFamily: 'League Spartan',
-    outline: 'none',
-    backgroundColor: '#FFFFFF',
+  logoSquidz: {
+    marginTop: 100,
+    width: 300,
+    height: 300,
+    marginBottom: 20,
   },
 
-  inputPasswordContainerSignIn: {
-    width: '90%',
-    height: 'auto',
+  buttomContainer: {
+    marginTop: 20,
+    alignItems: 'center',  
   },
 
-  
-  buttomLinkContainerSignIn: {
-    marginTop: 40,
-    fontSize: 16,
-    marginBottom: 10,
-    borderWidth: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    fontSize: 20,
-  },
-
-  buttomLinkSignIn: {
-    height: 50,
-    width: '100%',
+  button: {
+    height: 65,
+    width: 200,
     backgroundColor: '#6B9AC4',
     borderWidth: 0,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 20,
-    fontSize: 20,
-    fontFamily: 'League Spartan',
-    color: 'white',
+    alignItems: 'center',  
   },
   
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+
   signUpText: {
+    marginTop: 20,
     fontWeight: 'normal',
     color: 'white',
-
   },
 
   signUpLink: {
@@ -110,8 +75,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textDecorationLine: 'underline',
   },
-  
-
 });
 
 export default styles;

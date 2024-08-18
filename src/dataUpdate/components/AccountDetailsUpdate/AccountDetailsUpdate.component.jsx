@@ -2,50 +2,44 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { DataUpdateService } from '../../services/DataUpdate.service.js';
 
-const AccountDetailsUpdate = ({ userData, onCancel, onConfirm }) => {
+const AccountDetailsUpdate = ({ userData, navigation }) => {
     const [firstName, setFirstName] = useState(userData?.name?.firstName || '');
     const [lastName, setLastName] = useState(userData?.name?.lastName || '');
     const [phoneNumber, setPhoneNumber] = useState(userData?.phoneNumber?.number || '');
-    const [countryCode] = useState(userData?.phoneNumber?.countryCode || '51');
     const dataUpdateService = new DataUpdateService();
 
     const handleFormSubmit = async () => {
         try {
             const updatedUserData = {
-                firstName,
-                lastName,
-                phoneNumber: {
-                    countryCode,
-                    number: phoneNumber
-                }
+                name : firstName + ' ' + lastName,
+                phoneNumber,
             };
             const response = await dataUpdateService.updateUser(updatedUserData);
 
             if (response.ok) {
-                const message = await response.text();
-                Alert.alert('Success', 'Data updated successfully');
-                onConfirm(updatedUserData);
+                Alert.alert('Exitoso', 'Datos actualizados correctamente');
+                navigation.goBack();
             } else {
-                throw new Error('Error updating data');
+                throw new Error('Error actualizando los datos del usuario');
             }
         } catch (error) {
-            Alert.alert('Error', 'Failed to update data');
+            Alert.alert('Error', 'Error al actualizar los datos del usuario');
         }
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Edit Account Details</Text>
+            <Text style={styles.title}>Perfil</Text>
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="First Name"
+                    placeholder="Nombres"
                     value={firstName}
                     onChangeText={(text) => setFirstName(text)}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Last Name"
+                    placeholder="Apellidos"
                     value={lastName}
                     onChangeText={(text) => setLastName(text)}
                 />
@@ -53,17 +47,17 @@ const AccountDetailsUpdate = ({ userData, onCancel, onConfirm }) => {
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Phone Number"
+                    placeholder="Teléfono (+51)"
                     value={phoneNumber}
                     onChangeText={(text) => setPhoneNumber(text)}
                 />
             </View>
             <View style={styles.formActions}>
                 <TouchableOpacity style={styles.button} onPress={handleFormSubmit}>
-                    <Text style={styles.buttonText}>Confirm Changes</Text>
+                    <Text style={styles.buttonText}>Guardar cambios</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
-                    <Text style={styles.buttonText}>Cancel</Text>
+                <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
+                    <Text style={styles.buttonText}>Cancelar</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -1,53 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
-import Header from '../components/LayoutsComponents/Header';
-import Sidebar from '../components/LayoutsComponents/Sidebar';
-import ProfilePicture from '../components/ProfilePicture/ProfilePicture';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import AccountDetails from '../components/AccountDetails/AccountDetails';
-import { DataUpdateService } from '../services/DataUpdate.service.js';
 
 const ProfilePage = () => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const dataUpdateService = new DataUpdateService();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await dataUpdateService.getUser();
-                setUserData(data);
-            } catch (error) {
-                alert("Error fetching user data:", error);
-                setError('There was a problem loading user data.');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
-
-    if (loading) {
-        return (
-            <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#000" />
-                <Text style={styles.loadingText}>Loading data...</Text>
-            </View>
-        );
-    }
-
-    if (error) {
-        return <Text style={styles.errorText}>{error}</Text>;
-    }
-
     return (
         <View style={styles.profilePage}>
-            <Header />
-            <Sidebar />
             <View style={styles.profileMain}>
                 <View style={styles.profileSection}>
-                    <ProfilePicture />
-                    <AccountDetails userData={userData} />
+                    <AccountDetails />
                 </View>
             </View>
         </View>

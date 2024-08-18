@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import defaultProfile from '../../assets/images/default-profile.png';
 
-const ProfilePicture = () => {
+const ProfilePictureComponent = () => {
     return (
         <View style={styles.profilePicture}>
-            <Text style={styles.profileTitle}>Profile Picture</Text>
+            <Text style={styles.profileTitle}>Perfil</Text>
             <View style={styles.profileContainer}>
                 <Image source={defaultProfile} style={styles.profileImage} />
             </View>
             <TouchableOpacity style={styles.profileButton}>
-                <Text style={styles.profileButtonText}>Upload New Image</Text>
+                <Text style={styles.profileButtonText}>Cargar nueva foto</Text>
             </TouchableOpacity>
         </View>
     );
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         maxWidth: 350,
         height: '100%',
         maxHeight: 350,
-        marginHorizontal: 'auto', // Centrar horizontalmente
+        marginHorizontal: 'auto', // centrar horizontalmente
         boxSizing: 'border-box',
         alignItems: 'center',
         justifyContent: 'center',
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         height: 100,
         width: 100,
-        resizeMode: 'cover', // Asegura que la imagen se ajuste bien al contenedor
+        resizeMode: 'cover', // asegura que la imagen se ajuste bien al contenedor
     },
     profileButton: {
         backgroundColor: '#6B9AC4',
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ProfilePicture;
+export default ProfilePictureComponent;

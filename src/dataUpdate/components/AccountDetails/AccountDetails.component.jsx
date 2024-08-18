@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { DataUpdateService } from '../../services/DataUpdate.service.js';
-import AccountDetailsUpdate from '../AccountDetailsUpdate/AccountDetailsUpdate';
+import AccountDetailsUpdateComponent from '../AccountDetailsUpdate/AccountDetailsUpdate.component.jsx';
 
-const AccountDetails = () => {
+const AccountDetailsComponent = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
+    const navigation = useNavigation();
     const dataUpdateService = new DataUpdateService();
 
     useEffect(() => {
@@ -15,7 +16,7 @@ const AccountDetails = () => {
                 const data = await dataUpdateService.getUser();
                 setUserData(data);
             } catch (error) {
-                Alert.alert('Error', 'Failed to fetch user data.');
+                Alert.alert('Error', 'Error al obtener datos del usuario.');
             } finally {
                 setLoading(false);
             }
@@ -26,6 +27,7 @@ const AccountDetails = () => {
 
     const handleEditClick = () => {
         setIsEditing(true);
+        navigation.navigate('AccountDetailsUpdate', { userData });
     };
 
     const handleCancelEdit = () => {
@@ -36,29 +38,26 @@ const AccountDetails = () => {
         setUserData((prevData) => ({
             ...prevData,
             name: {
-                firstName: updatedUserData.firstName,
-                lastName: updatedUserData.lastName,
+                firstName: updatedUserData.name.firstName,
+                lastName: updatedUserData.name.lastName,
             },
-            phoneNumber: {
-                ...prevData.phoneNumber,
-                number: updatedUserData.phoneNumber.number,
-            }
+            phoneNumber: updatedUserData.phoneNumber
         }));
         setIsEditing(false);
     };
 
     if (loading) {
-        return <Text>Loading data...</Text>;
+        return <Text>Cargando datos...</Text>;
     }
 
     if (isEditing) {
         return (
-            <AccountDetailsUpdate
+            <AccountDetailsUpdateComponent
                 userData={{
                     ...userData,
                     phoneNumber: {
                         ...userData.phoneNumber,
-                        number: String(userData.phoneNumber.number) // Convert to string
+                        number: String(userData.phoneNumber.number)
                     }
                 }}
                 onCancel={handleCancelEdit}
@@ -69,17 +68,17 @@ const AccountDetails = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Account Details</Text>
+            <Text style={styles.title}>Perfil</Text>
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="First Name"
+                    placeholder="Nombres"
                     value={userData.name.firstName}
                     editable={false}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Last Name"
+                    placeholder="Apellidos"
                     value={userData.name.lastName}
                     editable={false}
                 />
@@ -87,7 +86,7 @@ const AccountDetails = () => {
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Email Address"
+                    placeholder="Correo electrónico"
                     value={userData.emailAddress.address}
                     editable={false}
                 />
@@ -95,17 +94,17 @@ const AccountDetails = () => {
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Phone (+51)"
+                    placeholder="Teléfono (+51)"
                     value={userData.phoneNumber.number}
                     editable={false}
                 />
             </View>
             <TouchableOpacity style={styles.button} onPress={handleEditClick}>
-                <Text style={styles.buttonText}>Update Details</Text>
+                <Text style={styles.buttonText}>Actualizar datos</Text>
             </TouchableOpacity>
             <Text style={styles.passwordLink}>
-                <Text onPress={() => { /* add action to change password */ }}>
-                    Want to change your password?
+                <Text onPress={() => { /* cambio contraseña */ }}>
+                    Desea cambiar su contraseña?
                 </Text>
             </Text>
         </View>
@@ -175,4 +174,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AccountDetails;
+export default AccountDetailsComponent;

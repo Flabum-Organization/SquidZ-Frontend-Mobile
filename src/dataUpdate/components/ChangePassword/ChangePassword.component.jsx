@@ -28,21 +28,21 @@ const ChangePasswordComponent = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Current Password</Text>
+            <Text style={styles.label}>Contraseña actual</Text>
             <TextInput
                 secureTextEntry
                 style={styles.input}
                 value={currentPassword}
                 onChangeText={setCurrentPassword}
             />
-            <Text style={styles.label}>New Password</Text>
+            <Text style={styles.label}>Nueva contraseña</Text>
             <TextInput
                 secureTextEntry
                 style={styles.input}
                 value={newPassword}
                 onChangeText={setNewPassword}
             />
-            <Text style={styles.label}>Confirm New Password</Text>
+            <Text style={styles.label}>Repetir nueva contraseña</Text>
             <TextInput
                 secureTextEntry
                 style={styles.input}
@@ -50,7 +50,7 @@ const ChangePasswordComponent = () => {
                 onChangeText={setConfirmPassword}
             />
             <Button 
-                title={loading ? 'Updating...' : 'Update Password'} 
+                title={loading ? 'Actualizando...' : 'Actualizar contraseña'} 
                 onPress={handleUpdatePassword} 
                 disabled={loading}
             />
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginBottom: 8,
+        justifyContent: 'left'
     },
     input: {
         borderWidth: 1,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 16,
         borderRadius: 4,
+        justifyContent: 'left'
     },
 });
 

@@ -7,6 +7,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
+        <StatusBar style="auto" />
         <ChangePasswordPage />
       </View>
     </SafeAreaProvider>

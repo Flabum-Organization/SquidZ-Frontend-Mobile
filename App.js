@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { PasswordUpdatePage } from './src/dataUpdate/pages/PasswordUpdatePage/PasswordUpdatePage';
-import PasswordUpdateComponent from './src/dataUpdate/components/PasswordUpdate/PasswordUpdate.component';
+import ChangePasswordPage from "./src/dataUpdate/pages/ChangePasswordPage/ChangePasswordPage"
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <PasswordUpdateComponent></PasswordUpdateComponent>
-    </View>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <ChangePasswordPage />
+      </View>
+    </SafeAreaProvider>
   );
 }
 

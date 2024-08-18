@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import { DataUpdateService } from '../../services/DataUpdate.service';
 
-const PasswordUpdateComponent = () => {
+const ChangePasswordComponent = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PasswordUpdateComponent;
+export default ChangePasswordComponent;

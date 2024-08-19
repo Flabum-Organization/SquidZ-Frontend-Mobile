@@ -3,33 +3,35 @@ import { View, Text, TextInput, TouchableOpacity, Image, Animated} from 'react-n
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import styles from './SignIn.styles';
+import { AuthenticationService } from '../../services/Authentication.service';
+
+const authenticationService = new AuthenticationService();
 
 export function SignIn ()  {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
+    const [type, setType] = useState('');
+    const [message, setMessage] = useState('');
+    const [details, setDetails] = useState('');
+
     const insets = useSafeAreaInsets();
 
-    const handleSignUp = async () => {
+
+    const SingInFormSubmit = async () => {
         setLoading(true);
 
-        if (!validateName(name) || !validateName(lastName) || !validateEmail(email) || !validateTelephone(telephone) || !validatePassword(password) || password !== repeatPassword) {
-            setLoading(false);
-            errorSignUp();
-            return;
-        }
-
         try {
-            await authenticationService.signUp(name, lastName, email, telephone, password, repeatPassword);
-            successSignUp();
-            onSignInClick();
-        } catch (error) {
-            errorSignUp();
-        } finally {
-            setLoading(false);
+            console.log('TARAO');
+            await authenticationService.signIn(email, password);
+            console.log('GAAAAo...');
+            successSignIn();
+        }catch (error){
+            console.error('CAGAOO PAVO', error);
         }
     };
+
 
     return (
         <View style={{paddingTop: insets.top, paddingBottom: insets.bottom}}>
@@ -64,7 +66,7 @@ export function SignIn ()  {
                 <View style={styles.buttomContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => console.log('Boton presionado :D')}>
+                        onPress={SingInFormSubmit}>
                         <Text style={styles.buttonText}>
                             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                         </Text>

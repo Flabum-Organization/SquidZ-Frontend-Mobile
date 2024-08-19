@@ -1,27 +1,27 @@
-import {API_BASE_URL} from "../../shared/service/url-common";
+import { API_BASE_URL } from "../../shared/service/url-common";
 
-export class AuthenticationService {
+export class AuthenticationService{
 
     async signIn(email, password) {
         try {
-            const response = await fetch(`${API_BASE_URL}/users/sign-in?email=${email}&password=${password}`, {
+            const response = await fetch(`${API_BASE_URL}/users/sign-in?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, 
+            {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     'Accept': 'application/json'
-                },
-                credentials: 'include'
+                }
             });
-
+        
             if (!response.ok) {
                 throw new Error('Authentication returned error.');
             }
-
+    
             const data = await response.json();
-            // Maneja la respuesta según sea necesario, por ejemplo, guardando el token en el estado de la aplicación o en un almacenamiento seguro
+            // Maneja la respuesta según sea necesario
             return data;
         } catch (error) {
-            console.error(error.message);
+            console.error('ALAMRD returned error:', error);
             throw error;
         }
     }
